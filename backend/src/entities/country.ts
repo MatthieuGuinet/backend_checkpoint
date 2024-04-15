@@ -23,11 +23,15 @@ export class Country extends BaseEntity {
 
   constructor(
     datas: {
+      code: string;
+      name: string;
       emoji: string;
     } | null = null
   ) {
     super();
     if (datas) {
+      this.code = datas.code;
+      this.name = datas.name;
       this.emoji = datas.emoji;
     }
   }

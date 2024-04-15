@@ -3,9 +3,7 @@ import { buildSchema } from "type-graphql";
 import { ApolloServer } from "@apollo/server";
 import { CountryResolver } from "../resolvers/country.resolver";
 
-async function createServer(
-  customContext: any = undefined
-): Promise<ApolloServer> {
+async function createServer(): Promise<ApolloServer> {
   await dataSource.initialize();
 
   const schema = await buildSchema({
