@@ -6,8 +6,13 @@ import { CreateCountryInputType } from "../types/createCountryInputType";
 @Resolver(Country)
 export class CountryResolver {
   @Query(() => [Country])
-  country(): Promise<Country[]> {
+  countries(): Promise<Country[]> {
     return CountryService.getCountries();
+  }
+
+  @Query(() => Country)
+  countryByCode(@Arg("code") code: string): Promise<Country | null> {
+    return CountryService.getCountryByCode(code);
   }
 
   @Mutation(() => Country)

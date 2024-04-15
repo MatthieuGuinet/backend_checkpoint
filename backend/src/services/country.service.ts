@@ -10,6 +10,9 @@ export function createCountry(countryDatas: {
   emoji: string;
 }): Promise<Country> {
   const newCountry = new Country(countryDatas);
-  console.log(newCountry);
   return newCountry.save();
+}
+
+export function getCountryByCode(code: string): Promise<Country | null> {
+  return Country.findOne({ where: { code: code } });
 }

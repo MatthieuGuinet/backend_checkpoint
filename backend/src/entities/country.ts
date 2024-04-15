@@ -9,7 +9,7 @@ export class Country extends BaseEntity {
   @Field()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @Field()
   code: string;
 
