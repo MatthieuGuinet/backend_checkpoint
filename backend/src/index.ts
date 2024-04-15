@@ -2,12 +2,7 @@ import "reflect-metadata";
 import createServer from "./config/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
-import sqlite3 from "sqlite3";
-
-const port: number = 3001;
-
 const start = async () => {
-  const db = new sqlite3.Database("./checkpoint_backend.sqlite");
   const server = await createServer();
 
   try {

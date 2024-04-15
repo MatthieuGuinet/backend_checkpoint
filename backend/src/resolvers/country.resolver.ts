@@ -2,6 +2,7 @@ import { Arg, Query, Resolver, Mutation } from "type-graphql";
 import { Country } from "../entities/country";
 import * as CountryService from "../services/country.service";
 import { CreateCountryInputType } from "../types/createCountryInputType";
+import { Continent } from "../entities/continent";
 
 @Resolver(Country)
 export class CountryResolver {
@@ -15,8 +16,15 @@ export class CountryResolver {
     return CountryService.getCountryByCode(code);
   }
 
+  @Query(() => [Country])
+  countryByContinent(
+    @Arg("continentCode") continent: Continent
+  ): Promise<Country[] | null> {
+    return CountryService.getCountriesByContinent(continent);
+  }
+
   @Mutation(() => Country)
-  createCountry(
+  async createCountry(
     @Arg("country") country: CreateCountryInputType
   ): Promise<Country> {
     return CountryService.createCountry({ ...country });

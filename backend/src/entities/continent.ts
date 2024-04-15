@@ -3,15 +3,15 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToOne,
+  OneToMany,
 } from "typeorm";
 
 import { ObjectType, Field } from "type-graphql";
-import { Continent } from "./continent";
+import { Country } from "./country";
 
 @Entity()
 @ObjectType()
-export class Country extends BaseEntity {
+export class Continent extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field()
   id: number;
@@ -24,26 +24,20 @@ export class Country extends BaseEntity {
   @Field()
   name: string;
 
-  @Column()
-  @Field()
-  emoji?: string;
-
-  @Field()
-  @ManyToOne(() => Continent, (continent) => continent.countries)
-  continent: Continent;
+  @Field(() => [Country])
+  @OneToMany(() => Country, (countries) => countries.code)
+  countries?: Country[];
 
   constructor(
     datas: {
       code: string;
       name: string;
-      emoji: string;
     } | null = null
   ) {
     super();
     if (datas) {
       this.code = datas.code;
       this.name = datas.name;
-      this.emoji = datas.emoji;
     }
   }
 }
