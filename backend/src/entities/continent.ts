@@ -24,8 +24,8 @@ export class Continent extends BaseEntity {
   @Field()
   name: string;
 
-  @Field(() => [Country])
-  @OneToMany(() => Country, (countries) => countries.code)
+  @Field(() => [Country], { nullable: true })
+  @OneToMany(() => Country, (countries) => countries.continent)
   countries?: Country[];
 
   constructor(

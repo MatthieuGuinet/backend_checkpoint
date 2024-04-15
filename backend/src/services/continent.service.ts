@@ -5,10 +5,6 @@ export function getContinent(): Promise<Continent[]> {
   return Continent.find();
 }
 
-export function getCountries(continentCode: number): Promise<Country[]> {
-  return Country.find({ where: { continent: { id: continentCode } } });
-}
-
 export function createContinent(continentDatas: {
   code: string;
   name: string;
@@ -18,5 +14,8 @@ export function createContinent(continentDatas: {
 }
 
 export function getContinentByCode(code: string): Promise<Continent | null> {
-  return Continent.findOne({ where: { code: code } });
+  return Continent.findOne({
+    where: { code: code },
+    relations: { countries: true },
+  });
 }
