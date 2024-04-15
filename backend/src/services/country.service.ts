@@ -9,19 +9,6 @@ export function getCountries(): Promise<Country[]> {
   });
 }
 
-export function getCountriesByContinent(
-  continent: Continent
-): Promise<Country[] | null> {
-  return Country.find({
-    where: {
-      continent: { code: continent.code },
-    },
-    relations: {
-      continent: true,
-    },
-  });
-}
-
 export async function createCountry(countryDatas: {
   code: string;
   name: string;

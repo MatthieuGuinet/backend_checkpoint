@@ -11,6 +11,13 @@ export class ContinentResolver {
     return ContinentService.getContinent();
   }
 
+  @Query(() => [Country])
+  continentCountries(
+    @Arg("continentCode") continentCode: number
+  ): Promise<Country[]> {
+    return ContinentService.getCountries(continentCode);
+  }
+
   @Query(() => Continent)
   continentByCode(@Arg("code") code: string): Promise<Continent | null> {
     return ContinentService.getContinentByCode(code);

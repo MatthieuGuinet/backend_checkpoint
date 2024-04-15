@@ -16,13 +16,6 @@ export class CountryResolver {
     return CountryService.getCountryByCode(code);
   }
 
-  @Query(() => [Country])
-  countryByContinent(
-    @Arg("continentCode") continent: Continent
-  ): Promise<Country[] | null> {
-    return CountryService.getCountriesByContinent(continent);
-  }
-
   @Mutation(() => Country)
   async createCountry(
     @Arg("country") country: CreateCountryInputType
